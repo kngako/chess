@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+config/development.json
+config/production.json
