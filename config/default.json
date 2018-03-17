@@ -10,7 +10,7 @@
         "database" : "chessClub",
         "username" : "chesss",
         "password" : "chess",
-        "storage" : "db/database.sqlite"
+        "storage" : "database.sqlite"
     },
     "server" : {
         // Unique sercret key to be used on the express cookies...
