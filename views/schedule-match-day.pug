@@ -1,0 +1,33 @@
+extends layout.pug
+
+block content
+    <div id="content-root">
+        <div class="container">
+            <h2 class="flow-text">Schedule match day</h2>
+            <div class="row">
+                <form class="col s12"  action="/schedule-match-day" method="post">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Which day will matches be played"  id="match_day" name="match_day" type="text" class="datepicker">
+                            <label for="match_day">Match Day</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="What time will you be playing from" id="from" name="from" type="text" class="timepicker">
+                            <label for="from">From</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="What time will you be playing until" id="until" name="until" type="text" class="timepicker">
+                            <label for="until">Until</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button  class="btn waves-effect waves-light" type="submit" name="action">Schedule Match</button>
+
+                    </div>
+                </form>
+            </div>
+                
+        </div>
+    </div>

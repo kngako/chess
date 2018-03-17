@@ -1,0 +1,136 @@
+extends layout.pug
+
+block additionalCSS
+    style
+        include includes/css/matches.css
+
+block content
+    <div id="content-root" >
+        <div class="row" v-if="state">
+            <div class="col s12">
+                <!-- TODO: Show a loading screen here... -->
+                <div id="match-calendar"  class="match-grid-wrapper">
+                    <p class="flow-text center">This is where the match calender will be viewed.</p>
+                    <div class="row" v-if="isUserAdmin()">
+                        <div class="col s12">
+                            <a class="btn modal-trigger" href="#schedule-match-day-form">schedule a match day</a>
+                        </div>
+                    </div>
+                    
+                    <div v-for="day in state.matchCalendar">
+                        <match-day-component v-bind:day=day v-bind:user="state.user"></match-day-component>
+                        
+
+                        <!-- TODO: Might wanna move this out of the parent component... -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Modal Structure -->
+        <div id="add-board-modal" class="modal modal-fixed-footer"  v-if="state">
+            <div class="modal-content">
+                <h4>Add board to match day</h4>
+                <div class="row">
+                    <form id="add-board-form" class="col s12">
+                        <!-- Need to add hidden id -->
+                        <input id="match_day_id" name="match_day_id" type="hidden">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Board name" id="board_name" name="board_name" type="text" class="validate">
+                                <label for="board_name">Board Name</label>
+                            </div>
+                            
+                        </div>
+                        <div id="match-range" class="row">
+                            <div class="row">
+                                <div class="col s12">
+                                    <p class="flow-text">All matches on this board will have {{ state.duration }} minutes for each player.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="range-field col s12">
+                                    <input v-model.number="state.duration" name="duration" type="range"  min="5" max="15" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <p>by adding this board you are certifying that it will be there for other members to play with.</p>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+                <a id="submit-add-board-form" v-on:click="postAddBoard()" class="modal-action waves-effect waves-green btn-flat">Add Board</a>
+            </div>
+        </div>
+
+        <div id="schedule-match-day-form" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Schedule match day</h4>
+                <div class="row">
+                    <form id="match-day-form" class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Where will the match be play?" name="venue" id="venue" type="text" class="validate">
+                                <label for="venue">Venue</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Which day will matches be played" name="day" id="match_day" type="text" class="datepicker">
+                                <label for="match_day">Match Day</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="What time will you be playing from" name="from" id="from" type="text" class="timepicker">
+                                <label for="from">From</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input placeholder="What time will you be playing until" name="until" id="until" type="text" class="timepicker">
+                                <label for="until">Until</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+                <!-- TODO: Run the post when this is pressed... -->
+                <a id="submit-match-day" href="#!" class="modal-action waves-effect waves-green btn-flat ">Schedule Match Day</a> 
+            </div>
+        </div>
+
+        <div class="container">
+            <p class="flow-text center">Yes, most things on this page look ugly. <a href="/contribute">Contribute</a> towards the development which will make this look good.</p>
+        </div>
+
+    </div>
+
+    //- 
+        <!-- <script type="text/x-template" id="match-day-template">
+            <div class="match-day-wrapper">
+                <div class="match-date-header-wrapper center">
+                    <h4>{{ new Date(day.from).toLocaleTimeString("en-us", {  weekday: "long", year: "numeric", month: "short",  day: "numeric", hour: "2-digit", minute: "2-digit" }) }}</h4>
+                    <p class="flow-text"> Venue: {{ day.venue }} </p>
+                    <div class="row">
+                        <div class="col s12"  v-if="isUserAdmin()">
+                            <a class="btn" v-on:click="openAddBoardForm">add board</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="match-list-wrapper">
+                    <div class="match-board-wrapper" v-for="board in day.boards">
+                        <board-item-component v-bind:board=board v-bind:user=user></board-item-component>
+                    </div>
+                </div>
+            </div>
+        </script> -->
+
+block additionalScripts
+    script
+        include includes/js/matches.js

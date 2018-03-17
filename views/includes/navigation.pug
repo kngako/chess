@@ -1,0 +1,12 @@
+- var navigation = [{name: "basics",link: "/"},{name: "Match Events",link: "/matches/"},{name: "Match Results",link: "/match-result/"},{name: "Log",link: "/chess-logs/"},{name: "Play online",link: "/play-online/"},{name: "Membership Info",link: "/membership/"},{name: "Blog",link: "https://medium.com/chess-club"}]
+
+//- TODO: Make this a nav...
+<div  role="banner">
+    <a class="navigation-menu-toggle btn">Menu</a>
+    <ul class="navigation-menu">
+        each item in navigation
+            <li class="navigation-item">
+                <a class="waves-effect waves-light flow-text black-text" href="#{item.link}" >#{item.name}</a>
+            </li>
+    </ul>
+</div>

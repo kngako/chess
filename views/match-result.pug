@@ -1,0 +1,33 @@
+extends layout.pug
+
+block additionalCSS
+    style
+        include includes/css/matches.css
+
+block content
+    <div id="content-root">
+        <div class="row" v-if="state">
+            <div class="col s12">
+                <!-- TODO: Show a loading screen here... -->
+                <div id="match-calendar"  class="match-grid-wrapper">
+                    <p class="flow-text center">This is where the match results will be viewed.</p>
+                    
+                    <div v-for="day in state.matchCalendar">
+                        <match-day-component v-bind:day=day v-bind:user="state.user"></match-day-component>
+                        <!-- TODO: Might wanna move this out of the parent component... -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div class="container">
+            <p class="flow-text center">Yes, most things on this page look ugly. <a href="/contribute">Contribute</a> towards the development which will make this look good.</p>
+        </div>
+
+    </div>
+
+block additionalScripts
+    script
+        include includes/js/match-result.js

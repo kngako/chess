@@ -1,0 +1,35 @@
+extends layout.pug
+
+block content
+    <div id="content-root">
+        <div class="container">
+            <h2 class="flow-text">Membership invitation requests are currently not needed. But you can still pass the time by filling this form.</h2>
+            <form id="signup-form">
+                <!-- Link this to the vue stuff.. -->
+                <div  class="row">
+                    <div class="col s12">
+                        <label for="email">Email:</label>
+                        <input class="validate" id="email" type="email" name="username"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m6">
+                        <label for="firstName">First Name:</label>
+                        <input id="firstName" type="text" name="firstName"/>
+                    </div>
+                    <div class="col s12 m6">
+                        <label for="lastName">Last Name:</label>
+                        <input id="lastName" type="text" name="lastName"/>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col s12">
+                        <button  class="btn waves-effect waves-light" v-on:click="attemptInvitation">Sign up</button>
+                    </div>
+                </div>  
+                
+            </form>
+                
+        </div>
+    </div>

@@ -1,0 +1,67 @@
+extends layout.pug
+
+block content
+    <!-- content should always have on root... -->
+    <div id="content-root">
+        <div class="row">
+            <div class="container">
+                <!-- http://www.pngpix.com/wp-content/uploads/2016/03/Chess-Pieces-PNG-image.png -->
+                    <img class="responsive-img" src="/img/chess-pieces.png"/>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="container">
+                <p class="flow-text">Some would say that <q>Chess is the ability to be violent towards others without going to jail.</q></p>
+                <p class="flow-text">Here is what you need to know to play the game.</p>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs z-depth-1">
+                    <li class="tab col s2"><a href="#pawn" class="active">Pawn</a></li>
+                    <li class="tab col s2"><a href="#knight">Knight</a></li>
+                    <li class="tab col s2"><a href="#bishop">Bishop</a></li>
+                    <li class="tab col s2"><a href="#castle">Castle</a></li>
+                    <li class="tab col s2"><a href="#queen">Queen</a></li>
+                    <li class="tab col s2"><a href="#king">King</a></li>
+                </ul>
+            </div>
+            <div id="pawn" class="col s12">
+                <div class="container">
+                    <p class="flow-text">A pawn is the simplest piece. Can only move forward one step. unless when it's attacking, in which case it will attack diagonally. Also it is worth matching that.</p>
+                </div>
+            </div>
+            <div id="knight" class="col s12">
+                <div class="container">
+                    <p class="flow-text">The knights move in an L shape to any open or threatened block.</p>
+                </div>
+            </div>
+            <div id="bishop" class="col s12">
+                <div class="container">
+                    <p class="flow-text">A bishop move and attack diagonally.</p>
+                </div>
+            </div>
+            <div id="castle" class="col s12">
+                <div class="container">
+                    <p class="flow-text">The castles move/attack horizontally and vertically from the position that they are.</p>
+                </div>
+            </div>
+            <div id="queen" class="col s12">
+                <div class="container">
+                    <p class="flow-text">The Queen, her majesty, moves and attacks diagonally, horizontally, vertically which ever many blocks she has open to her range.</p>
+                </div>
+                
+            </div>
+            <div id="king" class="col s12">
+                <div class="container">
+                    <p class="flow-text">The king moves like the queen just one step at a time. Also it's worth mention that if your King can't escape an attack from your opponents pieces then you loose the game. Your opponent will be sure to say "checkmate" when this happens. So do your best to escape attacks!</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <p class="flow-text"><a href="/contribute">Contribute</a> any information you think is missing from this introductory page.</p>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,83 @@
+doctype html
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"/>        
+        <link rel="stylesheet" href="/css/site.css">
+    
+        block additionalCSS
+
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        
+        //- Ensure page title is less then 55 chars...
+        - var pageTitle = pageTitle == null ? "Chess Club" : pageTitle;
+        <title>#{pageTitle}</title>
+
+        - var pageDescription = pageDescription == null ? "Chess Club site to allow easy coordination" : pageDescription;
+        <meta name="description" content="#{pageDescription}">
+
+        //- TODO: Use a transparent png here...
+        <link rel="icon" type="image/jpg" href="/img/king.jpg">
+        <link rel="apple-touch-icon" href="/img/king.jpg">
+    </head>
+    <body>
+        <div id="app" class="grid-wrapper"> 
+            <header id="header-content" class="header-wrapper z-depth-5" role="banner">
+                //- <header-component></header-component> -->
+                <div>
+                    <h2 class="white-text center">Chess Club</h2>
+                </div>
+                //- TODO: User logged in header view? stuff... -->
+            </header>
+            <main class="main-wrapper z-depth-3"  role="main">
+                //- TODO: Define this under main-component... -->  
+                block content
+                    p Failed to load content
+                
+                //- The loading content will look something like this... -->
+                <script type="text/x-template" id="loading-content">
+                    <div class="valign-wrapper">
+                        <div class="loader">Loading</div>
+                    </div>
+                </script>
+            </main>
+            <aside class="navigation-wrapper  z-depth-3">
+                include includes/navigation
+            </aside>
+            <footer id="footer-content" class="footer-wrapper">
+                <div>
+                    <div class="container">
+                        <br>
+                        <div class="row">
+                            <div class="col l6 s12">
+                                <h5 class="white-text">Chess Club</h5>
+                                <p class="white-text text-lighten-4">Let us play some chess.</p>
+                            </div>
+                            <div class="col l4 offset-l2 s12">
+                                <h5 class="white-text">DR:TL</h5>
+                                <ul>
+                                    <li><a href="/contribute">Contribute</a></li>
+                                    <li><a href="/terms-of-use">Terms of Use</a></li>
+                                    <li><a href="/cookie-policy">Cookie Policy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-copyright">
+                        <div class="white-text container">&copy; <a href="http://kngako.com">Kgothatso Ngako</a> 2017</div>
+                    </div>
+                    <br>
+                </div>
+            </footer>
+        </div>
+
+        <script src="/js/jquery-3.2.1.min.js"></script>
+        <script src="/js/materialize.min.js"></script>
+        <script src="/js/vue.js"></script>
+        <script src="/js/site.js"></script>
+        
+        //- Page specific script can be extended here...
+        block additionalScripts
+    </body>
+</html>

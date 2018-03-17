@@ -1,0 +1,76 @@
+/* Now is time to style the match grid */
+
+.match-grid-wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+}
+
+.matche-day-wrapper {
+    display: grid;
+    grid-template-areas: "match-date-header" "match-list";
+    grid-template-columns: 100%;
+    grid-template-rows: 50em auto;
+}
+
+.match-date-header-wrapper {
+    grid-area: match-date-header;
+}
+
+.match-list-wrapper {
+    grid-area: match-list;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(525px, 1fr));
+    grid-gap: 10px;
+}
+
+.match-board-wrapper {
+    width: 100%;
+}
+
+.match-board-matches-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.match-item-wrapper {
+    display: grid;
+    grid-template-areas: "match-title" "match-content" "match-actions";
+    grid-template-columns: 100%;
+    grid-template-rows: 4em 10em 3em;
+}
+
+.challenge-match {
+    background-image: url('/img/game.png');
+    background-size: cover;
+}
+
+.match-header-wrapper {
+    grid-area: match-title;
+}
+
+.match-content-wrapper {
+    grid-area: match-content;
+    display: grid;
+    grid-template: "champion vs challenger";
+    grid-template-columns: 35% 30% 35% 
+}
+
+.match-champion-wrapper {
+    grid-area: champion;
+}
+
+.match-challenger-wrapper {
+    grid-area: challenger;
+}
+
+.match-vs-wrapper {
+    grid-area: vs;
+}
+
+.match-actions-wrapper {
+    grid-area: match-actions;
+}
+
