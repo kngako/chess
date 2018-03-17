@@ -59,3 +59,4 @@ typings/
 
 config/development.json
 config/production.json
+database.sqlite
