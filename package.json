@@ -4,6 +4,7 @@
   "description": "Chess Club platform",
   "main": "chess.js",
   "scripts": {
+    "start": "node chess.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
