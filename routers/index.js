@@ -267,25 +267,24 @@ module.exports = function (options) {
             }
         })
         .post(function(request, response, next) {
-            if(request.user){ // User is already logged in so don't go to matches again...
-                response.status(400).json({
-                    message: "Already logged on..."
-                });
+            if(request.user){ 
+                // User is already logged in so don't go to matches again...
+                response.redirect('/matches');
             } else {
                 // Check arguments and handle the errors...
-                passport.authenticate('local')(request, response, () => {
-                    // TODO: Figure out what problems arises without saving session...
-                    response.json({
-                        success: true,
-                        message: "Login success"
-                    });
-                    // request.session.save((err) => {
-                    //     if (err) {
-                    //         return next(err);
-                    //     }
-                    //     response.redirect('/matches');
-                    // });
-                });
+                passport.authenticate('local', (error, user, info) => {                
+                    if(info) {
+                        response.render("login", {
+                            pageTitle: "Chess Club - Login"
+                        });
+                    }
+                    if(user) {
+                        request.logIn(user, function(err) {
+                            if (err) { return next(err); }
+                            return  response.redirect('/matches');
+                        });  
+                    }
+                })(request, response, next);
             }
         });
 
