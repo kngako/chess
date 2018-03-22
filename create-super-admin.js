@@ -7,27 +7,45 @@ var prompt = require('prompt');
 
 db.LoadDB().then((config, dbInstance)=>{
     // We could probably run the things in the seeders...
-    db.Role.findAll()
-    .then(roles => {
-        // TODO: The things..
-        if(roles.length == 0) {
-            return db.Role.bulkCreate([
-                {
-                    type: "user",
-                    description: "All users should have this role..."
-                },
-                {
-                    type: "admin",
-                    description: "This role takes care of the things in the club..."
-                },
-                {
-                    type: "superadmin",
-                    description: "The God that can do all the things on the system..."
-                }
-            ]);
+    db.Membership.findAll({
+        // TODO: Handle ordering business...
+        include: [{
+            association: db.Membership.Roles
+        }]
+    }) // TODO: Search for a root membership...
+    .then(memberships => {
+        if(memberships.length == 0) {
+            console.log("Creating init Chess Club Membership");
+            return db.Membership.create({
+                name: "CSIR Chess Club",
+                description: "CSIR Chess Club for the beginners and the experts...",
+                roles: [
+                    {
+                        type: "member",
+                        description: "All users should have this role..."
+                    },
+                    {
+                        type: "admin",
+                        description: "This role takes care of the things in the club..."
+                    },
+                    {
+                        type: "superadmin",
+                        description: "The God that can do all the things on the system..."
+                    }
+                ]
+            }, {
+                include: [{
+                    association: db.Membership.Roles
+                }]
+            })
         } else {
-            return roles;
+            console.log("No need to create a chess club: " + JSON.stringify(memberships));
+            return memberships[0];
         }
+    })
+    .then(membership => {
+        // TODO: The things..
+        return membership.roles;
     })
     .then(roles => {
         // Roles have been made and all...

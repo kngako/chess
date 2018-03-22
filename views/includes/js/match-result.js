@@ -10,8 +10,8 @@ Vue.component('match-day-component', {
         isUserAdmin: function (event) {
             // TODO: Find a more secure role id system...
             var user = this.user;
-            for(var i in user.user_roles) {
-                var userRole = user.user_roles[i].role.type;
+            for(var i in user.userRoles) {
+                var userRole = user.userRoles[i].role.type;
                 if(userRole == "admin" || userRole == "superadmin" ) {
                     return true;
                 }
@@ -54,8 +54,8 @@ Vue.component('board-item-component', {
         isUserAdmin: function (event) {
             // TODO: Find a more secure role id system...
             var user = this.user;
-            for(var i in user.user_roles) {
-                var userRole = user.user_roles[i].role.type;
+            for(var i in user.userRoles) {
+                var userRole = user.userRoles[i].role.type;
                 if(userRole == "admin" || userRole == "superadmin" ) {
                     return true;
                 }
@@ -115,8 +115,8 @@ Vue.component('match-result-component', {
         isUserAdmin: function (event) {
             // TODO: Find a more secure role id system...
             var user = this.user;
-            for(var i in user.user_roles) {
-                var userRole = user.user_roles[i].role.type;
+            for(var i in user.userRoles) {
+                var userRole = user.userRoles[i].role.type;
                 if(userRole == "admin" || userRole == "superadmin" ) {
                     return true;
                 }
@@ -166,7 +166,7 @@ Vue.component('match-actions-component', {
             // var match = this.match;
             // TODO: Might wanna show a prompt?
 
-            var membershipId = this.user.user_memberships[this.user.selectedUserMembership].membershipId;
+            var membershipId = this.user.userMemberships[this.user.selectedUserMembership].membershipId;
             $.post("/api/membership/" + membershipId + "/match/" + this.match.id + "/result", {
                 winnerId: winnerId
             })
@@ -182,7 +182,7 @@ Vue.component('match-actions-component', {
         },
         deleteResult: function () {
             // return false;
-            var membershipId = this.user.user_memberships[this.user.selectedUserMembership].membershipId;
+            var membershipId = this.user.userMemberships[this.user.selectedUserMembership].membershipId;
             $.ajax("/api/membership/" + membershipId + "/match/" + this.match.id + "/result", {
                 type: "delete"
             })
@@ -251,8 +251,8 @@ $(document).ready(function(){
             isUserAdmin: function (event) {
                 // TODO: Find a more secure role id system...
                 var user = this.state.user;
-                for(var i in user.user_roles) {
-                    var userRole = user.user_roles[i].role.type;
+                for(var i in user.userRoles) {
+                    var userRole = user.userRoles[i].role.type;
                     if(userRole == "admin" || userRole == "superadmin" ) {
                         return true;
                     }
@@ -278,8 +278,8 @@ $(document).ready(function(){
             duration: 10
         }
         data.selectedUserMembership = 0;
-        if(data.user_memberships.length > 0) {
-            app.state.matchCalendar = data.user_memberships[data.selectedUserMembership].membership.match_days; 
+        if(data.userMemberships.length > 0) {
+            app.state.matchCalendar = data.userMemberships[data.selectedUserMembership].membership.match_days; 
         } else {
             // Show the failed to load stuff here...
             Materialize.toast("Please contact admin to be added into a club membership");

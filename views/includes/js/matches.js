@@ -7,8 +7,8 @@ Vue.component('match-day-component', {
         isUserAdmin: function (event) {
             // TODO: Find a more secure role id system...
             var user = this.user;
-            for(var i in user.user_roles) {
-                var userRole = user.user_roles[i].role.type;
+            for(var i in user.userRoles) {
+                var userRole = user.userRoles[i].role.type;
                 if(userRole == "admin" || userRole == "superadmin" ) {
                     return true;
                 }
@@ -64,8 +64,8 @@ Vue.component('board-item-component', {
         isUserAdmin: function (event) {
             // TODO: Find a more secure role id system...
             var user = this.user;
-            for(var i in user.user_roles) {
-                var userRole = user.user_roles[i].role.type;
+            for(var i in user.userRoles) {
+                var userRole = user.userRoles[i].role.type;
                 if(userRole == "admin" || userRole == "superadmin" ) {
                     return true;
                 }
@@ -79,7 +79,7 @@ Vue.component('board-item-component', {
             // TODO: Show approval popup... 
             var board = this.board;
 
-            var membershipId = this.user.user_memberships[app.state.user.selectedUserMembership].membershipId;
+            var membershipId = this.user.userMemberships[app.state.user.selectedUserMembership].membershipId;
             $.ajax("/api/membership/" + membershipId + "/board/" + board.id,{
                 type: "delete"
             })
@@ -155,7 +155,7 @@ Vue.component('match-actions-component', {
             // TODO: Might wanna show a prompt?
 
             // TODO: Close user from seeing this...
-            var membershipId = this.user.user_memberships[this.user.selectedUserMembership].membershipId;
+            var membershipId = this.user.userMemberships[this.user.selectedUserMembership].membershipId;
             $.post("/api/membership/" + membershipId + "/match/" + match.id + "/challenge")
             .done(function (data) {
                 match.champion = data.champion;
@@ -172,7 +172,7 @@ Vue.component('match-actions-component', {
             console.log("User leaving match on: ", match);
             // Execute challenge...s
             
-            var membershipId = this.user.user_memberships[this.user.selectedUserMembership].membershipId;
+            var membershipId = this.user.userMemberships[this.user.selectedUserMembership].membershipId;
             $.ajax("/api/membership/" + membershipId + "/match/" + match.id + "/challenge",{
                 type: "delete"
             })
@@ -232,10 +232,10 @@ $(document).ready(function(){
         methods: {
             isUserAdmin: function (event) {
                 // TODO: Find a more secure role id system...
-                console.log("Dat: ", this.state.user);
+                console.log("User: ", this.state.user);
                 var user = this.state.user;
-                for(var i in user.user_roles) {
-                    var userRole = user.user_roles[i].role.type;
+                for(var i in user.userRoles) {
+                    var userRole = user.userRoles[i].role.type;
                     if(userRole == "admin" || userRole == "superadmin" ) {
                         return true;
                     }
@@ -249,7 +249,7 @@ $(document).ready(function(){
                 console.log("Attempting to Send: ", $boardForm.serialize());
                 
                 if(this.state.user) {
-                    var membershipId = this.state.user.user_memberships[this.state.user.selectedUserMembership].membershipId;
+                    var membershipId = this.state.user.userMemberships[this.state.user.selectedUserMembership].membershipId;
                     $.post( "/api/membership/" + membershipId + "/board", $boardForm.serialize())
                     .done(function(data) {
                         // Show result...
@@ -291,8 +291,8 @@ $(document).ready(function(){
             duration: 10
         }
         data.selectedUserMembership = 0;
-        if(data.user_memberships.length > 0) {
-            app.state.matchCalendar = data.user_memberships[data.selectedUserMembership].membership.match_days; 
+        if(data.userMemberships.length > 0) {
+            app.state.matchCalendar = data.userMemberships[data.selectedUserMembership].membership.match_days; 
         } else {
             // Show the failed to load stuff here...
             Materialize.toast("Please contact admin to be added into a club membership");
@@ -331,7 +331,7 @@ $(document).ready(function(){
         
                 // TODO: Run the required check...
                 console.log("Attempting to Send: ", $form.serialize());
-                var membershipId = app.state.user.user_memberships[app.state.user.selectedUserMembership].membershipId;
+                var membershipId = app.state.user.userMemberships[app.state.user.selectedUserMembership].membershipId;
                 $.post( "/api/membership/" + membershipId + "/matchday" , $form.serialize(), function( response, error) {
                     // TODO: Might wanna add the response to the matches...
                     
